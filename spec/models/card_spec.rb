@@ -35,14 +35,14 @@ describe Card do
     it { should_not be_valid }
   end
 
-  describe "with blank type" do
-    before { @card.type = " "}
+  describe "with invalid cost" do
+    before { @card.cost = "W1" }
 
     it { should_not be_valid }
   end
 
-  describe "with invalid cost" do
-    before { @card.cost = "W1" }
+  describe "with blank type" do
+    before { @card.type = " "}
 
     it { should_not be_valid }
   end
