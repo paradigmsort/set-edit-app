@@ -3,7 +3,7 @@ class CreateCards < ActiveRecord::Migration
     create_table :cards do |t|
       t.string :name
       t.string :cost
-      t.string :type
+      t.string :typeline # type is reserved for storing class in case of inheritance
       t.string :text
       t.integer :power
       t.integer :toughness

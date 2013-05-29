@@ -14,12 +14,20 @@
 #
 
 class Card < ActiveRecord::Base
-  attr_accessible :name, :cost, :type, :text, :power, :toughness
+  attr_accessible :name, :cost, :typeline, :text, :power, :toughness
 
   validates :name, presence: true
   VALID_COST_REGEX = /\A\d*(W|U|B|R|G)*\z/
   validates :cost, format: { with: VALID_COST_REGEX }
-  validates :type, presence: true
+  validates :typeline, presence: true
   validates :power, presence: true, unless: "toughness.nil?"
   validates :toughness, presence: true, unless: "power.nil?"
+
+  def power_toughness
+    if power.nil? or toughness.nil?
+      nil
+    else
+      power.to_s + "/" + toughness.to_s
+    end
+  end
 end

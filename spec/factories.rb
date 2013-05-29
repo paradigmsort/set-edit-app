@@ -2,7 +2,7 @@ FactoryGirl.define do
   factory :card do
     name "Squire"
     cost "1W"
-    type "Creature"
+    typeline "Creature"
     text ""
     power 1
     toughness 2

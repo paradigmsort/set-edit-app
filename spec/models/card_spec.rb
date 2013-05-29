@@ -22,12 +22,15 @@ describe Card do
 
   it { should respond_to(:name) }
   it { should respond_to(:cost) }
-  it { should respond_to(:type) }
+  it { should respond_to(:typeline) }
   it { should respond_to(:text) }
   it { should respond_to(:power) }
   it { should respond_to(:toughness) }
+  it { should respond_to(:power_toughness) }
 
   it { should be_valid }
+
+  its(:power_toughness) { should_not be_nil }
 
   describe "with blank name" do
     before { @card.name = " " }
@@ -41,8 +44,8 @@ describe Card do
     it { should_not be_valid }
   end
 
-  describe "with blank type" do
-    before { @card.type = " "}
+  describe "with blank typeline" do
+    before { @card.typeline = " "}
 
     it { should_not be_valid }
   end
@@ -63,5 +66,6 @@ describe Card do
     before { @card.power = @card.toughness = nil }
 
     it { should be_valid }
+    its(:power_toughness) { should be_nil }
   end
 end
