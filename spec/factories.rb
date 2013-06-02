@@ -4,7 +4,6 @@ FactoryGirl.define do
     cost "1W"
     typeline "Creature"
     text ""
-    power 1
-    toughness 2
+    power_toughness "1/2"
   end
 end

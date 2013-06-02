@@ -50,22 +50,28 @@ describe Card do
     it { should_not be_valid }
   end
 
-  describe "with nil power but non-nil toughness" do
-    before { @card.power = nil }
+  describe "via power_toughness" do
+    describe "successfully setting" do
+      before { @card.power_toughness = "2/7" }
 
-    it { should_not be_valid }
-  end
+      its(:power) { should == 2 }
+      its(:toughness) { should == 7 }
+      its(:power_toughness) { should == "2/7" }
+    end
 
-  describe "with nil toughness but non-nil power" do
-    before { @card.power = nil }
+    describe "unsuccessfully setting" do
+      before { @card.power_toughness = "1/3/5" }
 
-    it { should_not be_valid }
-  end
+      it { should_not be_valid }
+      its(:power_toughness) { should == "1/3/5" }
+    end
 
-  describe " with nil toughness and power" do
-    before { @card.power = @card.toughness = nil }
+    describe "setting to nil" do
+      before { @card.power_toughness = "" }
 
-    it { should be_valid }
-    its(:power_toughness) { should be_nil }
+      it { should be_valid }
+      its(:power) { should be_nil }
+      its(:toughness) { should be_nil }
+    end
   end
 end

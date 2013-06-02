@@ -1,2 +1,20 @@
-<h1>Cards#new</h1>
-<p>Find me in app/views/cards/new.html.erb</p>
+<% provide(:title,"New Card") %>
+<h1>New Card</h1>
+<%= form_for(@card) do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <%= f.label :cost, "Mana Cost" %>
+  <%= f.text_field :cost %>
+
+  <%= f.label :typeline, "Type" %>
+  <%= f.text_field :typeline %>
+
+  <%= f.label :text, "Text" %>
+  <%= f.text_area :text %>
+
+  <%= f.label :power_toughness, "Power/Toughness" %>
+  <%= f.text_field :power_toughness %>
+
+  <%= f.submit "Create", class: "btn btn-large btn-primary" %>
+<% end %>
