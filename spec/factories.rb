@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :card do
-    name "Squire"
+    sequence(:name)  { |n| "Squire #{n}" }
     cost "1W"
     typeline "Creature"
     text ""
