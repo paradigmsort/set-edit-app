@@ -1,5 +1,13 @@
 include ApplicationHelper
 
+def fill_card_form(card)
+  fill_in "Name", with: card.name
+  fill_in "Cost", with: card.cost
+  fill_in "Type", with: card.typeline
+  fill_in "Text", with: card.text
+  fill_in "Power/Toughness", with: card.power_toughness
+end
+
 RSpec::Matchers.define :have_title do |title|
   match do |page|
     if title.empty?

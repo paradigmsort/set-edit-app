@@ -30,7 +30,9 @@ describe Card do
 
   it { should be_valid }
 
-  its(:power_toughness) { should_not be_nil }
+  it "should have non-nil power_toughness" do
+    @card.power_toughness { should_not be_nil }
+  end
 
   describe "with blank name" do
     before { @card.name = " " }
@@ -52,7 +54,10 @@ describe Card do
 
   describe "via power_toughness" do
     describe "successfully setting" do
-      before { @card.power_toughness = "2/7" }
+      before do
+        @card.power_toughness = "2/7" 
+        @card.save
+      end
 
       its(:power) { should == 2 }
       its(:toughness) { should == 7 }
@@ -63,11 +68,16 @@ describe Card do
       before { @card.power_toughness = "1/3/5" }
 
       it { should_not be_valid }
-      its(:power_toughness) { should == "1/3/5" }
+      it "should show correctly" do
+        @card.power_toughness { should == "1/3/5"}
+      end
     end
 
     describe "setting to nil" do
-      before { @card.power_toughness = "" }
+      before do 
+        @card.power_toughness = ""
+        @card.save
+      end
 
       it { should be_valid }
       its(:power) { should be_nil }

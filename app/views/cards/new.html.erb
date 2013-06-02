@@ -1,20 +1,26 @@
 <% provide(:title,"New Card") %>
 <h1>New Card</h1>
-<%= form_for(@card) do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
 
-  <%= f.label :cost, "Mana Cost" %>
-  <%= f.text_field :cost %>
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@card) do |f| %>
+      <%= render 'shared/error_messages' %>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
 
-  <%= f.label :typeline, "Type" %>
-  <%= f.text_field :typeline %>
+      <%= f.label :cost, "Mana Cost" %>
+      <%= f.text_field :cost %>
 
-  <%= f.label :text, "Text" %>
-  <%= f.text_area :text %>
+      <%= f.label :typeline, "Type" %>
+      <%= f.text_field :typeline %>
 
-  <%= f.label :power_toughness, "Power/Toughness" %>
-  <%= f.text_field :power_toughness %>
+      <%= f.label :text, "Text" %>
+      <%= f.text_area :text %>
 
-  <%= f.submit "Create", class: "btn btn-large btn-primary" %>
-<% end %>
+      <%= f.label :power_toughness, "Power/Toughness" %>
+      <%= f.text_field :power_toughness %>
+
+      <%= f.submit "Create", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>

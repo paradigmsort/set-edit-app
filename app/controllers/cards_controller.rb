@@ -6,4 +6,14 @@ class CardsController < ApplicationController
   def new
     @card = Card.new
   end
+
+  def create
+    @card = Card.new(params[:card])
+    if @card.save
+      flash[:success] = "Added " + @card.name
+      redirect_to root_path
+    else
+      render 'new'
+    end
+  end
 end
