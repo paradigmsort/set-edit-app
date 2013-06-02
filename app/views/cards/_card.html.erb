@@ -1,11 +1,7 @@
 
-<li>
-<ul>
-  <li><%= card.name %></li>
-  <li><%= card.cost %></li>
-  <li><%= card.typeline %></li>
-  <% unless card.power_toughness.nil? %>
-    <li><%= card.power_toughness %></li>
-  <% end %>
-</ul>
-</li>
+<tr>
+  <td><%= card.name %></td>
+  <td><%= card.cost %></td>
+  <td><%= card.typeline %></td>
+  <td><%= card.power_toughness unless card.power_toughness.nil? %></td>
+</tr>

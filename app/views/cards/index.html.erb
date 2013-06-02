@@ -1,3 +1,13 @@
-<ul class="cards">
-  <%= render @cards %>
-</ul>
+<table id="cards">
+  <thead>
+    <tr>
+      <th scope="col" id="name">Name</th>
+      <th scope="col" id="cost">Cost</th>
+      <th scope="col" id="typeline">Type</th>
+      <th scope="col" id="power_toughness">P/T</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render @cards %>
+  </tbody>
+</table>

@@ -28,15 +28,32 @@ body {
   padding-top: 60px;
 }
 
-.cards {
-  list-style: none;
-  ul {
-    float: left;
-    list-style: none;
-    li {
-      float: left;
-      margin-left: 10px;
-    }
+#cards {
+  /* box style, #3 from http://coding.smashingmagazine.com/2008/08/13/top-10-css-table-designs/ */
+  margin: 0;
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
+  th {
+    font-size: 13px;
+    font-weight: normal;
+    padding: 8px;
+    background: #b9c9fe;
+    border-top: 2px solid #aabcfe;
+    border-bottom: 2px solid #aabcfe;
+    color: #039;
+  }
+  td {
+    padding: 8px;
+    background: #e8edff; 
+    border-bottom: 1px solid #fff;
+    color: #669;
+    border-top: 1px solid transparent;
+  }
+  tr:hover td
+  {
+    background: #d0dafd;
+    color: #339;
   }
 }
 
