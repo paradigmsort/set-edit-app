@@ -31,6 +31,10 @@ class Card < ActiveRecord::Base
     @power_toughness || (power.to_s + '/' + toughness.to_s unless power.nil? or toughness.nil?)
   end
 
+  def image_url
+    'http://s3.amazonaws.com/set-editor-mse-images/' + id.to_s
+  end
+
   private
     POWER_TOUGHNESS_REGEX = /\A(\d+)\/(\d+)\z/
     def check_power_toughness
