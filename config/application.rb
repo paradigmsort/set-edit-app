@@ -65,7 +65,7 @@ module SetEditApp
             ENV['cloud_image_builder_url'] = 'localhost'
             ENV['cloud_image_builder_port'] = '3001'
         else
-            ENV['cloud_image_store'] = 'http://s3.amazonaws.com/set-editor-mse-images/'
+            ENV['cloud_image_store'] = 'http://s3.amazonaws.com/set-editor-mse-images'
             ENV['cloud_image_builder_url'] = 'ec2-50-16-162-2.compute-1.amazonaws.com'
             ENV['cloud_image_builder_port'] = '80'
         end
