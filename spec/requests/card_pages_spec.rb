@@ -53,7 +53,7 @@ describe "Card Pages" do
 
       describe "after submission" do
         before { click_button("Create") }
-        it { should have_title("Cards") }
+        it { should have_title("")}
         it { should have_content("Added")}
       end
     end

@@ -1,6 +1,6 @@
 
 <tr>
-  <td><%= card.name %></td>
+  <td><%= link_to card.name, card %></td>
   <td><%= card.cost %></td>
   <td><%= card.typeline %></td>
   <td><%= card.power_toughness unless card.power_toughness.nil? %></td>
