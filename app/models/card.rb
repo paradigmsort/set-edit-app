@@ -12,6 +12,7 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
+require 'net/http'
 
 class Card < ActiveRecord::Base
   attr_accessible :name, :cost, :typeline, :text, :power_toughness
@@ -26,13 +27,14 @@ class Card < ActiveRecord::Base
   validate :check_power_toughness
 
   before_save :save_power_toughness
+  after_save :create_image
 
   def power_toughness
     @power_toughness || (power.to_s + '/' + toughness.to_s unless power.nil? or toughness.nil?)
   end
 
   def image_url
-    'http://s3.amazonaws.com/set-editor-mse-images/' + id.to_s
+    ENV['cloud_image_store'] + "/card_#{id}.jpg"
   end
 
   private
@@ -53,6 +55,16 @@ class Card < ActiveRecord::Base
             self.toughness = match.captures.second
           end
         end
+      end
+    end
+
+    def image_post_string
+      {id: id, name: name, cost: cost, typeline: typeline, text: text, power: power, toughness: toughness}.to_query
+    end
+
+    def create_image
+      Net::HTTP.start(ENV['cloud_image_builder_url'], ENV['cloud_image_builder_port']) do |http|
+        http.post('/images', image_post_string)
       end
     end
 end

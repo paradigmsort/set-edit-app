@@ -11,7 +11,7 @@ class CardsController < ApplicationController
     @card = Card.new(params[:card])
     if @card.save
       flash[:success] = "Added " + @card.name
-      redirect_to root_path
+      redirect_to @card
     else
       render 'new'
     end
