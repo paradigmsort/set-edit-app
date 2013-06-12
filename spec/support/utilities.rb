@@ -8,6 +8,10 @@ def fill_card_form(card)
   fill_in "Power/Toughness", with: card.power_toughness
 end
 
+def fill_comment_form(comment)
+  fill_in "comment[content]", with: comment.content
+end
+
 def mock_image_server
   stub_request(:post, 'http://' + ENV['cloud_image_builder_url'] + ':' + ENV['cloud_image_builder_port'] + '/images')
 end

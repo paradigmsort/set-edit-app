@@ -1,1 +1,11 @@
 <img src="<%= @card.image_url %>" alt="<%= @card.name %>" >
+<% if user_signed_in? %>
+  <%= form_for(current_user.comments.build()) do |f| %>
+    <div><%= f.hidden_field :card_id , value: @card.id %></div>
+    <%= f.text_area :content %>
+
+    <%= f.submit "Add comment", class: "btn btn-large btn-primary" %>
+  <% end %>
+<% else %>
+  Sign in to comment.
+<% end %>

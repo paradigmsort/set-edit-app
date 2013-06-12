@@ -62,8 +62,36 @@ describe "Card Pages" do
 
   describe "Card Page" do
     let(:card) { FactoryGirl.create(:card) }
-    before { visit cards_path(card) }
+    before { visit card_path(card) }
 
-    it { should have_content(card.name) }
+    it { should have_selector("img", alt: card.name) }
+
+    describe "when not signed in" do
+      it { should have_content("Sign in to comment") }
+    end
+
+    describe "when signed in" do
+      before do
+        @user = FactoryGirl.create(:user)
+        sign_in @user
+        visit card_path(card)
+      end
+
+      it { should_not have_content("Sign in") }
+      it { should have_button("Add comment") }
+
+      describe "submitting empty form" do
+        it "should not create a comment" do
+          expect { click_button "Add comment" }.not_to change(Comment, :count)
+        end
+      end
+
+      describe "submitting valid form" do
+        before { fill_comment_form(FactoryGirl.create(:comment, card: card, user: @user)) }
+        it "should create a comment" do
+          expect { click_button "Add comment" }.to change(Comment, :count).by(1)
+        end
+      end
+    end
   end
 end

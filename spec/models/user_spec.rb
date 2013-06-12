@@ -31,6 +31,7 @@ describe User do
   it(:email) { should_not == user_2.email }
 
   describe "comments" do
+    before { mock_image_server }
     let(:old_comment) { FactoryGirl.create(:comment, user: user, created_at: 1.day.ago) }
     let(:new_comment) { FactoryGirl.create(:comment, user: user, created_at: 1.hour.ago) }
     before do

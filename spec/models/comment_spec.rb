@@ -26,7 +26,13 @@ describe Comment do
     it { should_not be_valid }
   end
 
-   describe "accessing through user" do
+  describe "with no content" do
+    before { @comment.content = " " }
+
+    it { should_not be_valid }
+  end
+
+  describe "accessing through user" do
     let(:new_comment) { FactoryGirl.create(:comment) }
 
     it "should work" do
