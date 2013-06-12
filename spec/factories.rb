@@ -9,8 +9,14 @@ FactoryGirl.define do
   end
 
   factory :user do
-    sequence(:email) { 'user-#{n}@example.com' }
+    sequence(:email) { "user-#{n}@example.com" }
     password '123456789'
     password_confirmation '123456789'
+  end
+
+  factory :comment do
+    sequence(:content) { "Lorum Ipsum #{n}" }
+    user
+    card
   end
 end

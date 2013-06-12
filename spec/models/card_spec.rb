@@ -87,4 +87,17 @@ describe Card do
       its(:toughness) { should be_nil }
     end
   end
+
+  describe "comments" do
+    let(:old_comment) { FactoryGirl.create(:comment, card: @card, created_at: 1.day.ago) }
+    let(:new_comment) { FactoryGirl.create(:comment, card: @card, created_at: 1.hour.ago) }
+    before do
+      old_comment.save
+      new_comment.save
+    end
+
+    it "should be in the right order" do
+      @card.comments.should == [new_comment, old_comment]
+    end
+  end
 end

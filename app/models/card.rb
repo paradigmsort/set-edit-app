@@ -44,6 +44,8 @@ class Card < ActiveRecord::Base
   before_save :save_power_toughness
   after_save :create_image
 
+  has_many :comments
+
   def power_toughness
     @power_toughness || (power.to_s + '/' + toughness.to_s unless power.nil? or toughness.nil?)
   end
