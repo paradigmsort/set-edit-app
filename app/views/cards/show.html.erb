@@ -1,11 +1,27 @@
-<img src="<%= @card.image_url %>" alt="<%= @card.name %>" >
-<% if user_signed_in? %>
-  <%= form_for(current_user.comments.build()) do |f| %>
-    <div><%= f.hidden_field :card_id , value: @card.id %></div>
-    <%= f.text_area :content %>
+<div class="row">
+  <aside class="span4">
+    <img src="<%= @card.image_url %>" alt="<%= @card.name %>" >
+    <% if user_signed_in? %>
+      <%= form_for(current_user.comments.build()) do |f| %>
+        <div><%= f.hidden_field :card_id , value: @card.id %></div>
+        <%= f.text_area :content %>
 
-    <%= f.submit "Add comment", class: "btn btn-large btn-primary" %>
-  <% end %>
-<% else %>
-  Sign in to comment.
-<% end %>
+        <%= f.submit "Comment", class: "btn btn-large btn-primary" %>
+      <% end %>
+    <% else %>
+      Sign in to comment.
+    <% end %>
+  </aside>
+
+  <div class="span8">
+    <ol class="comments">
+      <% @card.comments.each do |comment| %>
+        <li>
+          <span class="user"><%= comment.user.email %></span>
+          <span class="content"><%= comment.content %></span>
+          <span class="timestamp">Posted <%= time_ago_in_words(comment.created_at) %> ago.</span>
+        </li>
+      <% end %>
+    </ol>
+  </div>
+</div>

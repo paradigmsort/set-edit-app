@@ -28,6 +28,30 @@ body {
   padding-top: 60px;
 }
 
+aside {
+  float: left;
+}
+
+input, textarea, select, .uneditable-input {
+  border: 1px solid #bbb;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  @include box_sizing;
+}
+
+input {
+  height: auto !important;
+}
+
+aside {
+  textarea {
+    height: 100px;
+    margin-top: 15px;
+    margin-bottom: 5px;
+  }
+}
+
 #cards {
   /* box style, #3 from http://coding.smashingmagazine.com/2008/08/13/top-10-css-table-designs/ */
   margin: 0;
@@ -55,6 +79,24 @@ body {
     background: #d0dafd;
     color: #339;
   }
+}
+
+.comments {
+  list-style: none;
+  margin: 10px 0 0 0;
+  li {
+    padding: 10px 0;
+    border-top: 1px solid #e8e8e8;
+  }
+}
+.user {
+  color: $grayLight;
+}
+.content {
+  display: block;
+}
+.timestamp {
+  color: $grayLight;
 }
 
 /* debug-dump */
