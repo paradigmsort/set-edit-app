@@ -16,7 +16,10 @@
 require 'spec_helper'
 
 describe Card do
-  before { @card = FactoryGirl.create(:card) }
+  before do
+    mock_image_server
+    @card = FactoryGirl.create(:card)
+  end
 
   subject { @card }
 
@@ -55,7 +58,7 @@ describe Card do
   describe "via power_toughness" do
     describe "successfully setting" do
       before do
-        @card.power_toughness = "2/7" 
+        @card.power_toughness = "2/7"
         @card.save
       end
 
@@ -74,7 +77,7 @@ describe Card do
     end
 
     describe "setting to nil" do
-      before do 
+      before do
         @card.power_toughness = ""
         @card.save
       end

@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe "Card Pages" do
   subject { page }
+  before { mock_image_server }
 
   describe "Card Index" do
     before do
@@ -57,5 +58,12 @@ describe "Card Pages" do
         it { should have_content("Added")}
       end
     end
+  end
+
+  describe "Card Page" do
+    let(:card) { FactoryGirl.create(:card) }
+    before { visit cards_path(card) }
+
+    it { should have_content(card.name) }
   end
 end

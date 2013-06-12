@@ -62,7 +62,7 @@ module SetEditApp
     config.assets.initialize_on_precomile = false
 
     config.before_configuration do
-        if Rails.env.development? or Rails.env.test?
+        if Rails.env.development?
             ENV['cloud_image_store'] = '/set-editor-mse-images'
             ENV['cloud_image_builder_url'] = 'localhost'
             ENV['cloud_image_builder_port'] = '3001'

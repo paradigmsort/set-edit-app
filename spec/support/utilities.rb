@@ -8,6 +8,10 @@ def fill_card_form(card)
   fill_in "Power/Toughness", with: card.power_toughness
 end
 
+def mock_image_server
+  stub_request(:post, 'http://' + ENV['cloud_image_builder_url'] + ':' + ENV['cloud_image_builder_port'] + '/images')
+end
+
 RSpec::Matchers.define :have_title do |title|
   match do |page|
     if title.empty?
