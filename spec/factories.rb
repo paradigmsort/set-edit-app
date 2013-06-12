@@ -7,4 +7,10 @@ FactoryGirl.define do
     power 1
     toughness 2
   end
+
+  factory :user do
+    sequence(:email) { 'user-#{n}@example.com' }
+    password '123456789'
+    password_confirmation '123456789'
+  end
 end

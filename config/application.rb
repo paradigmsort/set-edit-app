@@ -59,6 +59,8 @@ module SetEditApp
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
+    config.assets.initialize_on_precomile = false
+
     config.before_configuration do
         if Rails.env.development? or Rails.env.test?
             ENV['cloud_image_store'] = '/set-editor-mse-images'

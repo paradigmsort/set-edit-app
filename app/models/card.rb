@@ -5,6 +5,21 @@
 #  id         :integer          not null, primary key
 #  name       :string(255)
 #  cost       :string(255)
+#  typeline   :string(255)
+#  text       :string(255)
+#  power      :integer
+#  toughness  :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
+# == Schema Information
+#
+# Table name: cards
+#
+#  id         :integer          not null, primary key
+#  name       :string(255)
+#  cost       :string(255)
 #  type       :string(255)
 #  text       :string(255)
 #  power      :integer
