@@ -17,6 +17,20 @@ class CardsController < ApplicationController
     end
   end
 
+  def edit
+    @card = Card.find(params[:id])
+  end
+
+  def update
+    @card = Card.find(params[:id])
+    if @card.update_attributes(params[:card])
+      flash[:success] = "Updated " + @card.name
+      redirect_to @card
+    else
+      render 'edit'
+    end
+  end
+
   def show
     @card = Card.find(params[:id])
   end

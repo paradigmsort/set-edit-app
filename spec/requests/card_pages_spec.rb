@@ -46,7 +46,8 @@ describe "Card Pages" do
     end
 
     describe "with correct form" do
-      before { fill_card_form(FactoryGirl.create(:card)) }
+      let(:card) { FactoryGirl.create(:card) }
+      before { fill_card_form(card) }
 
       it "should create a new card" do
         expect { click_button "Create" }.to change(Card, :count).by(1)
@@ -54,8 +55,8 @@ describe "Card Pages" do
 
       describe "after submission" do
         before { click_button("Create") }
-        it { should have_title("")}
-        it { should have_content("Added")}
+        it { should have_title(card.name) }
+        it { should have_content("Added") }
       end
     end
   end
@@ -63,10 +64,15 @@ describe "Card Pages" do
   describe "Card Page" do
     let(:card) { FactoryGirl.create(:card) }
     let(:comment) { FactoryGirl.create(:comment, card: card) }
-    before { visit card_path(card) }
+    before do
+      comment.save
+      visit card_path(card)
+    end
 
     it { should have_selector("img", alt: card.name) }
     it { should have_content(comment.content) }
+    it { should have_link ("Back to set") }
+    it { should have_link("Edit card", path: edit_card_path(card)) }
 
     describe "when not signed in" do
       it { should have_content("Sign in to comment") }
@@ -92,6 +98,38 @@ describe "Card Pages" do
         before { fill_comment_form(FactoryGirl.create(:comment, card: card, user: @user)) }
         it "should create a comment" do
           expect { click_button "Comment" }.to change(Comment, :count).by(1)
+        end
+      end
+    end
+  end
+
+  describe "Edit card page" do
+    let(:card) { FactoryGirl.create(:card) }
+    before { visit edit_card_path(card) }
+
+    it { should have_title("Edit Card") }
+    it { should have_field("Name", text: card.name) }
+    it { should have_field("Mana Cost", text: card.cost) }
+    it { should have_field("Type", text: card.typeline) }
+    it { should have_field("Text", text: card.text) }
+    it { should have_field("Power/Toughness", text: card.power_toughness) }
+    it { should have_button("Update") }
+
+    describe "when contents are changed" do
+      before do
+        card.name = "New Name"
+        fill_in "Name", with: card.name
+      end
+      describe "for commentless card" do
+        it "should not create a new card" do
+          expect { click_button "Update"}.not_to change(Card, :count)
+        end
+
+        describe "on submission" do
+          before { click_button "Update" }
+
+          it { should have_title(card.name) }
+          it { should have_content("Updated") }
         end
       end
     end

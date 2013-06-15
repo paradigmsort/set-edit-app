@@ -1,3 +1,4 @@
+<% provide(:title, @card.name) %>
 <div class="row">
   <aside class="span4">
     <img src="<%= @card.image_url %>" alt="<%= @card.name %>" >
@@ -11,6 +12,7 @@
     <% else %>
       Sign in to comment.
     <% end %>
+    <%= link_to "Edit card", path: edit_card_path(@card) %>
     <a href="/">Back to set</a>
   </aside>
 
