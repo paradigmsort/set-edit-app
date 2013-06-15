@@ -13,23 +13,11 @@
 #  updated_at :datetime         not null
 #
 
-# == Schema Information
-#
-# Table name: cards
-#
-#  id         :integer          not null, primary key
-#  name       :string(255)
-#  cost       :string(255)
-#  type       :string(255)
-#  text       :string(255)
-#  power      :integer
-#  toughness  :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#
 require 'net/http'
 
 class Card < ActiveRecord::Base
+  versioned
+
   attr_accessible :name, :cost, :typeline, :text, :power_toughness
   attr_writer :power_toughness
 
@@ -51,7 +39,7 @@ class Card < ActiveRecord::Base
   end
 
   def image_url
-    ENV['cloud_image_store'] + "/card_#{id}.jpg"
+    ENV['cloud_image_store'] + "/card_#{id}_#{version}.jpg"
   end
 
   private
@@ -76,7 +64,7 @@ class Card < ActiveRecord::Base
     end
 
     def image_post_string
-      {id: id, name: name, cost: cost, typeline: typeline, text: text, power: power, toughness: toughness}.to_query
+      {id: id, name: name, cost: cost, typeline: typeline, text: text, power: power, toughness: toughness, version: version}.to_query
     end
 
     def create_image

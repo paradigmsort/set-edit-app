@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: comments
+#
+#  id           :integer          not null, primary key
+#  content      :string(255)
+#  user_id      :integer
+#  card_id      :integer
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  card_version :integer
+#
+
 require 'spec_helper'
 
 describe Comment do

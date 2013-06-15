@@ -1,7 +1,7 @@
 <% provide(:title, @card.name) %>
 <div class="row">
   <aside class="span4">
-    <img src="<%= @card.image_url %>" alt="<%= @card.name %>" >
+    <img src="<%= @card.image_url %>" alt="<%= @card.name %>" card-version="<%= @card.version %>">
     <% if user_signed_in? %>
       <%= form_for(current_user.comments.build()) do |f| %>
         <div><%= f.hidden_field :card_id , value: @card.id %></div>
@@ -19,8 +19,13 @@
   <div class="span8">
     <ol class="comments">
       <% @card.comments.each do |comment| %>
-        <li>
-          <span class="user"><%= comment.user.email %></span>
+        <li card-version="<%= comment.card_version %>">
+          <span class="user">
+            <%= comment.user.email %>
+            <% if comment.card_version != @card.version %>
+              (on version <%= comment.card_version %>)
+            <% end %>
+          </span>
           <span class="content"><%= comment.content %></span>
           <span class="timestamp">Posted <%= time_ago_in_words(comment.created_at) %> ago.</span>
         </li>

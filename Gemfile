@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.13'
 gem 'bootstrap-sass', '2.1'
 gem 'devise', '2.2.4'
+gem 'vestal_versions', git: 'git://github.com/laserlemon/vestal_versions', branch: 'rails_3'
 
 group :development, :test do
     gem 'sqlite3', '1.3.5'

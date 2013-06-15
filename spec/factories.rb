@@ -18,5 +18,6 @@ FactoryGirl.define do
     sequence(:content) { |n| "Lorum Ipsum #{n}" }
     user
     card
+    card_version { card.version }
   end
 end
